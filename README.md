@@ -9,6 +9,8 @@ Se presentan visualizaciones comparativas del comportamiento teórico de los alg
 📄 **[Ver informe completo (PDF)](informe.pdf)**
 📄 **[Ver COLAB del proyecto (IPYNB)](ada_adicional.ipynb)**
 
-Piero Fabricio Poblete Andía
-Universidad La Salle Arequipa
-Analisis y Diseño de Algoritmos
+Piero Fabricio Poblete Andía.
+
+Universidad La Salle Arequipa.
+
+Analisis y Diseño de Algoritmos.
