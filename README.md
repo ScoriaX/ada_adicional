@@ -10,10 +10,10 @@ Se presentan visualizaciones comparativas del comportamiento teórico de los alg
 
 📄 **[Ver COLAB del proyecto (IPYNB)](ada_adicional.ipynb)**
 
-📄 **[Ver codigo del problema de programación](codigo_adicional.cpp)**
+📄 **[Ver codigo del problema de programación (CPP)](codigo_adicional.cpp)**
 
-Piero Fabricio Poblete Andía.
+**Alumno:** Piero Fabricio Poblete Andía.
 
-Universidad La Salle Arequipa.
+**Universidad:** Universidad La Salle Arequipa.
 
-Analisis y Diseño de Algoritmos.
+**Curso:** Analisis y Diseño de Algoritmos.
