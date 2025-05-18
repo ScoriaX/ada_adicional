@@ -1,4 +1,4 @@
-# Informe ADA - Multiplicación de Enteros Grandes
+# Informe ADA - Algoritmo de multiplicación de enteros de David Harvey y Joris van der Hoeven
 
 Este repositorio contiene el informe del proyecto de análisis de algoritmos de multiplicación de enteros grandes, con especial enfoque en el algoritmo de Harvey–van der Hoeven.
 
@@ -8,3 +8,7 @@ Se presentan visualizaciones comparativas del comportamiento teórico de los alg
 
 📄 **[Ver informe completo (PDF)](informe.pdf)**
 📄 **[Ver COLAB del proyecto (IPYNB)](ada_adicional.ipynb)**
+
+Piero Fabricio Poblete Andía
+Universidad La Salle Arequipa
+Analisis y Diseño de Algoritmos
