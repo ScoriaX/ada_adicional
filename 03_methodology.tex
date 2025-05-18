@@ -1,0 +1,189 @@
+% replace all text with your own text.
+% in this template few examples are mention
+\chapter{Metodología}
+\label{ch:method} % Label for method chapter
+
+La presente investigación adopta un enfoque exploratorio y visual para analizar el comportamiento teórico de diversos algoritmos de multiplicación de enteros. En lugar de implementar directamente cada algoritmo, se optó por modelar sus complejidades computacionales y proyectarlas gráficamente mediante herramientas de visualización en Python.
+
+Este enfoque permite comparar de forma clara y didáctica el crecimiento del costo computacional en función del tamaño de entrada, destacando las diferencias asintóticas entre métodos clásicos y avanzados. Se consideraron tanto algoritmos tradicionales como los más recientes de frontera, incluyendo el algoritmo de Harvey y van der Hoeven.
+
+A través de gráficos de líneas, barras y diagramas de caja, se representa el tiempo estimado, el uso relativo de memoria y la estabilidad de cada técnica bajo escenarios simulados. Estas visualizaciones fueron elaboradas en un entorno  Google Colab. 
+
+\url{https://colab.research.google.com/drive/108OUqSCE_rJrN7V5GDr3DEPX329aRdW0?usp=sharing}
+
+\section{Diseño del estudio}
+El diseño del estudio se orientó hacia la representación y comparación visual del comportamiento asintótico de diversos algoritmos de multiplicación de enteros. Debido a la complicación de algunos de los algoritmos, no se implementaron las versiones completas de estos; en cambio, se optó por gratificarlos mediante sus funciones de complejidad teórica en función del tamaño de entrada.
+
+Para esto, se definieron funciones matemáticas que modelan el tiempo estimado de ejecución de cada algoritmo según su orden de complejidad, por ejemplo: \( O(n^2) \), \( O(n^{1.585}) \), \( O(n \log n) \), entre otras. Estas funciones fueron evaluadas numéricamente en un rango de tamaños de entrada \( n \), seleccionados para reflejar el crecimiento de los costos computacionales.
+
+
+\section{Implementación}
+Para esta investigación, como se menciona anteriormente, no se realizó una implementación funcional de los algoritmos de multiplicación de enteros. En su lugar, se representaron visualmente sus comportamientos teóricos mediante gráficos generados con Python que permiten observar las diferencias de rendimiento esperadas entre ellos. No se simularon operaciones reales de multiplicación, sino que se proyectaron los tiempos relativos y otras métricas en función del tamaño de entrada.
+
+Esta aproximación busca facilitar una comprensión visual del crecimiento asintótico de cada algoritmo y permite establecer comparaciones claras en términos de eficiencia teórica.
+
+\subsection{Funciones de complejidad}
+
+\subsubsection{Código}
+\begin{lstlisting}[language=Python, caption={Codigo funciones de complejidad por algoritmo en Python}, label=list:python_code_ex]
+n = np.logspace(1, 7, 100, base=2)
+
+def traditional_multiplication_complexity(n):
+    return n**2
+
+def karatsuba_complexity(n):
+  return n**1.585
+
+def toom_cook_complexity(n):
+  return n**1.465
+
+def schonhage_strassen_1_complexity(n):
+  return n * np.log2(n) * np.log2(np.log2(n))
+
+def schonhage_strassen_2_complexity(n):
+  return n * np.log2(n)
+
+def furer_complexity(n):
+  return n * np.log2(n) * np.log2(np.log2(np.log2(n)))
+
+def harvey_lecerf_complexity(n):
+  return n * np.log2(n) * np.log2(np.log2(n))
+
+def new_harvey_vd_hoeven_complexity(n):
+  return n * np.log2(n)
+\end{lstlisting}
+
+\subsection{Gráfico de barras}
+
+\subsubsection{Código}
+
+\begin{lstlisting}[language=Python, caption={Codigo grafico de barras en Python}, label=list:python_code_ex]
+def plot_time_comparison_bar(n, algorithms, complexity_funcs):
+    times = [func(n) for func in complexity_funcs]
+
+    plt.figure(figsize=(10,6))
+    plt.barh(algorithms, times, color='skyblue')
+    plt.xlabel('Tiempo estimado (unidades arbitrarias)')
+    plt.title(f'Comparación de tiempos para n={n}')
+    plt.xscale('log')
+    plt.show()
+
+algorithms = [
+    "Tradicional",
+    "Karatsuba",
+    "Toom-Cook",
+    "Schönhage-Strassen 1",
+    "Schönhage-Strassen 2",
+    "Fürer",
+    "Harvey & Lecerf",
+    "New Harvey & vd Hoeven"
+]
+
+complexity_funcs = [
+    traditional_multiplication_complexity,
+    karatsuba_complexity,
+    toom_cook_complexity,
+    schonhage_strassen_1_complexity,
+    schonhage_strassen_2_complexity,
+    furer_complexity,
+    harvey_lecerf_complexity,
+    new_harvey_vd_hoeven_complexity
+]
+\end{lstlisting}
+
+\subsection{Gráfico de Tiempo vs Tamaño de entrada}
+
+\subsubsection{Código}
+
+\begin{lstlisting}[language=Python, caption={Codigo grafico de tiempo vs tamaño de entrada en Python}, label=list:python_code_ex]
+def plot_complexity_loglog(n_start, n_end, num_points, algorithms, complexity_funcs):
+    n_values = np.logspace(n_start, n_end, num_points, base=2)
+
+    plt.figure(figsize=(10,7))
+
+    for algo, func in zip(algorithms, complexity_funcs):
+        plt.plot(n_values, func(n_values), label=algo)
+
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.xlabel('Tamaño de entrada (n)')
+    plt.ylabel('Tiempo estimado (unidades arbitrarias)')
+    plt.title('Comparación de complejidad: Tiempo vs Tamaño de entrada')
+    plt.grid(True, which="both", ls="--", linewidth=0.5)
+    plt.legend()
+    plt.show()
+
+algorithms = [
+    "Multiplicación Tradicional (n²)",
+    "Karatsuba (n^1.585)",
+    "Toom-Cook (n^1.465)",
+    "Schönhage-Strassen 1 (n log n log log n)",
+    "Schönhage-Strassen 2 (n log n)",
+    "Fürer",
+    "Harvey & Lecerf (n log n log log n)",
+    "New Harvey & vd Hoeven (n log n)"
+]
+
+complexity_funcs = [
+    traditional_multiplication_complexity,
+    karatsuba_complexity,
+    toom_cook_complexity,
+    schonhage_strassen_1_complexity,
+    schonhage_strassen_2_complexity,
+    furer_complexity,
+    harvey_lecerf_complexity,
+    new_harvey_vd_hoeven_complexity
+]
+\end{lstlisting}
+
+\subsection{Gráfico de caja}
+
+\subsubsection{Código}
+\begin{lstlisting}[language=Python, caption={Codigo grafico de caja en Python}, label=list:python_code_ex]
+def plot_simulated_time_distribution(n, algorithms, complexity_funcs):
+    np.random.seed(42)
+    data = {
+        "Algoritmo": [],
+        "Tiempo": []
+    }
+
+    for algo, func in zip(algorithms, complexity_funcs):
+        for _ in range(10):
+            noise = np.random.normal(1, 0.1)
+            tiempo = func(n) * noise
+            data["Algoritmo"].append(algo)
+            data["Tiempo"].append(tiempo)
+
+    df = pd.DataFrame(data)
+
+    plt.figure(figsize=(12,7))
+    sns.boxplot(data=df, x="Tiempo", y="Algoritmo")
+    plt.xscale('log')
+    plt.title(f"Distribución de tiempos simulados por algoritmo para n={n}")
+    plt.xlabel("Tiempo (unidades arbitrarias)")
+    plt.ylabel("Algoritmo")
+    plt.show()
+
+algorithms = [
+    "Tradicional",
+    "Karatsuba",
+    "Toom-Cook",
+    "Schönhage-Strassen 1",
+    "Schönhage-Strassen 2",
+    "Fürer",
+    "Harvey & Lecerf",
+    "New Harvey & vd Hoeven"
+]
+
+complexity_funcs = [
+    traditional_multiplication_complexity,
+    karatsuba_complexity,
+    toom_cook_complexity,
+    schonhage_strassen_1_complexity,
+    schonhage_strassen_2_complexity,
+    furer_complexity,
+    harvey_lecerf_complexity,
+    new_harvey_vd_hoeven_complexity
+]
+\end{lstlisting}
+

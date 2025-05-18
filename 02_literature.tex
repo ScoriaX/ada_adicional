@@ -1,0 +1,132 @@
+\chapter{Fundamentos Teóricos}
+\label{ch:lit_rev} %Label of the chapter lit rev. The key ``ch:lit_rev'' can be used with command \ref{ch:lit_rev} to refer this Chapter.
+
+Desde la introducción del algoritmo de Karatsuba en 1962, diversos enfoques han comenzado a ser propuestos con el objetivo de reducir la complejidad computacional de esta operación. Cada nueva propuesta ha traido consigo una mejora técnica, y en ocasiones un cambio conceptual en la forma en que se aborda el problema.
+
+Dentro de esta sección se presenta una revisión detallada de los diferentes algoritmos, basada en los fundamentos teóricos expuestos en el artículo original de Integer multiplication in time \( O(n \log n) \)~\citep{HarveyHoeven2020}, el cual constituye el núcleo de este trabajo.
+Finalmente, se ofrecerá una revisión general y un resumen de los aportes más relevantes, con el fin de establecer una base de aprendizaje sólida.
+
+\section{Karatsuba} 
+
+\paragraph{Idea principal} 
+Busca reducir el número de multiplicaciones necesarias al dividir los operandos y reutilizar los productos parciales mediante combinaciones lineales.
+
+\paragraph{Concepto} 
+El algoritmo divide dos números de \( n \) dígitos en mitades y aplica una fórmula algebraica que permite calcular el producto total usando solo tres multiplicaciones en lugar de cuatro, como se haría tradicionalmente.
+
+\paragraph{Complejidad computacional} 
+\[
+    O(n^{\log_2 3}) \approx O(n^{1.585})
+\]
+
+\section{Toom-Cook} 
+
+\paragraph{Idea principal} 
+Extender la técnica de dividir y conquistar para particionar los números en más de dos partes, permitiendo reducir aún más el número de multiplicaciones necesarias mediante interpolación polinómica.
+
+\paragraph{Concepto} 
+El algoritmo divide los números en \( k \) partes (con \( k \geq 3 \)), evalúa los polinomios correspondientes en varios puntos, multiplica estos valores y luego reconstruye el resultado usando interpolación polinómica. Esto reduce la cantidad total de multiplicaciones, mejorando la eficiencia para números muy grandes.
+
+\paragraph{Complejidad computacional} 
+\[
+    O\left(n^{\log_{k}(2k - 1)}\right)
+\]
+
+En particular, para Toom-3 (división en 3 partes), la complejidad es aproximadamente \( O(n^{1.465}) \).
+
+\section{Sch\"onhage-Strassen first algorithm} 
+
+\paragraph{Idea principal} 
+Utilizar la Transformada Rápida de Fourier (FFT) en el dominio de números complejos para convertir la multiplicación de enteros en una multiplicación punto a punto, reduciendo significativamente la cantidad de operaciones necesarias.
+
+\paragraph{Concepto} 
+El algoritmo representa los números grandes como polinomios cuyos coeficientes son partes del número. Luego aplica la FFT para evaluar estos polinomios en raíces de la unidad, multiplica punto a punto las evaluaciones, y finalmente usa la transformada inversa para reconstruir el producto. Esto reduce la complejidad respecto a métodos anteriores y es especialmente eficiente para números muy grandes.
+
+\paragraph{Complejidad computacional} 
+\[
+    O\left(n \log n \log \log n\right)
+\]
+
+\section{Sch\"onhage-Strassen second algorithm} 
+
+\paragraph{Idea principal} 
+Mejorar la implementación del primer algoritmo mediante el uso de transformadas rápidas de Fourier sobre anillos de enteros módulo \(2^{m}+1\), eliminando la necesidad de trabajar con números complejos y mejorando la eficiencia práctica.
+
+\paragraph{Concepto} 
+En lugar de utilizar la FFT sobre números complejos, este método aplica la transformada rápida de Fourier en anillos de enteros módulo \(2^{m}+1\), conocidos como anillos de números de Fermat. Esto reduce los errores numéricos y facilita una implementación más eficiente y estable del algoritmo, manteniendo la alta velocidad para la multiplicación de enteros grandes.
+
+\paragraph{Complejidad computacional} 
+\[
+    O\left(n \log n \log \log n\right)
+\]
+
+\section{F\"urer}
+
+\paragraph{Idea principal} 
+Reducir aún más la complejidad de la multiplicación de enteros grandes al mejorar la eficiencia de la transformada rápida de Fourier mediante técnicas avanzadas de aritmética modular y análisis numérico.
+
+\paragraph{Concepto} 
+F\"urer introdujo una variante del algoritmo de Sch\"onhage-Strassen que emplea transformadas rápidas de Fourier en anillos especiales y optimiza la selección de parámetros para minimizar la sobrecarga computacional. Esto permite alcanzar una complejidad menor que la de Sch\"onhage-Strassen, especialmente para entradas extremadamente grandes.
+
+\paragraph{Complejidad computacional} 
+\[
+    O\left(n \log n \, 2^{O(\log^{*} n)}\right)
+\]
+
+donde \( \log^{*} n \) es la función logarítmica iterada, que crece extremadamente lentamente.
+
+\section{The Harvey-van der Hoeven-Lecerf algorithm}
+
+\paragraph{Idea principal} 
+Mejorar la eficiencia del algoritmo de F\"urer mediante una combinación innovadora de técnicas de análisis armónico y optimizaciones en la aritmética modular para acercarse a la complejidad óptima en la multiplicación de enteros grandes.
+
+\paragraph{Concepto} 
+Este algoritmo refina el enfoque de F\"urer aplicando nuevas estrategias de muestreo y transformadas rápidas en anillos especializados, logrando reducir la constante oculta en la complejidad y mejorando la práctica implementación de la multiplicación para números extremadamente grandes.
+
+\paragraph{Complejidad computacional} 
+\[
+    O\left(n \log n \, 4^{\log^{*} n}\right)
+\]
+
+donde \( \log^{*} n \) es la función logarítmica iterada.
+
+\section{New Harvey-van der Hoeven algorithm}
+
+\subsection{A conditional algorithm - Rader's trick}
+
+Optimiza la multiplicación de enteros grandes bajo ciertas condiciones específicas, utilizando una técnica conocida como el truco de Rader para transformar la multiplicación en un problema más manejable.
+
+El truco de Rader transforma la multiplicación de números grandes en convoluciones circulares que pueden ser resueltas eficientemente mediante transformadas rápidas de Fourier. Esta técnica condicional depende de propiedades específicas de los números involucrados, como su estructura y factorización, lo que permite acelerar la multiplicación en casos particulares.
+
+\subsection{An unconditional algorithm - Gaussian resampling}
+
+Es un método general y no condicionado para la multiplicación eficiente de enteros grandes, basado en un muestreo gaussiano que permite un tratamiento más flexible y robusto del problema.
+
+El algoritmo utiliza técnicas de remuestreo gaussiano para transformar la multiplicación en un problema que puede resolverse mediante convoluciones con propiedades probabilísticas favorables. Esta aproximación es independiente de condiciones especiales sobre los números y ofrece una alternativa sólida y teóricamente elegante a los métodos condicionados.
+
+\subsection{New Harvey-van der Hoeven algorithm explicado}
+
+\paragraph{Idea principal} 
+Propone un nuevo algoritmo que alcanza por primera vez una complejidad de \( O(n \log n) \) para la multiplicación de enteros, resolviendo así un problema abierto durante décadas.
+
+\paragraph{Concepto} 
+El algoritmo se basa en una combinación sofisticada de transformadas rápidas de Fourier (FFT) aplicadas sobre anillos de coeficientes adecuados, junto con una planificación recursiva eficiente y técnicas avanzadas de reducción de errores. Una de las innovaciones centrales es el uso del \textit{Rader's trick} para convertir ciertas convoluciones necesarias en convoluciones circulares de longitud primo, permitiendo así el uso efectivo de la FFT en dominios donde la estructura no era antes tan favorable. Esto elimina restricciones previas que limitaban la aplicabilidad directa de la FFT en estos casos.
+
+Además, el algoritmo incorpora un método no condicionado basado en el \textit{remuestreo gaussiano} (\textit{Gaussian resampling}), el cual permite trabajar con módulos altamente estructurados pero no necesariamente ideales, optimizando la eficiencia sin depender de supuestos específicos sobre los operandos. Este enfoque facilita la interpolación y evaluación numérica de polinomios con una precisión controlada, y resuelve dificultades técnicas anteriores relacionadas con errores de redondeo y pérdidas de precisión.
+
+La arquitectura general es altamente paralelizable, diseñada para ejecutarse eficientemente en hardware moderno, y utiliza ideas algebraicas profundas como extensiones de cuerpos finitos, estructuras de módulos, y factorizaciones específicas de transformadas.
+
+\paragraph{Complejidad computacional} 
+\[
+    O(n \log n)
+\]
+Resultado que representa el límite teóricamente más bajo conocido hasta la fecha para la multiplicación de enteros.
+
+% Pleae use this section
+\section{Resumen}
+
+Se ha contextualizado cada contribución, analizando su idea central, descripción conceptual y complejidad computacional.
+
+Recorrimos a través de métodos clásicos como Karatsuba y Toom-Cook, por algoritmos fundamentales como Schönhage-Strassen y Fürer, hasta llegar al algoritmo más reciente de Harvey y van der Hoeven.
+
+Este marco teórico servirá como base para el análisis experimental posterior, en el que se validarán empíricamente las diferencias de rendimiento entre algoritmos mediante implementaciones en Python y comparaciones de tiempos de ejecución.

@@ -1,0 +1,98 @@
+\chapter{Introducción}
+\label{ch:into} % This how you label a chapter and the key (e.g., ch:into) will be used to refer this chapter ``Introduction'' later in the report. 
+% the key ``ch:into'' can be used with command \ref{ch:intor} to refere this Chapter.
+
+\textbf{} La multiplicación de enteros ha representado un problema clásico desde hace décadas. Un problema con soluciones ya establecidas, sí, pero que sigue siendo objeto de estudio con el propósito de superar los límites impuestos por los métodos anteriores. Cada nueva propuesta intenta derribar la barrera marcada por la solución previa, en busca de mayor eficiencia y menor complejidad.
+
+Al centrarnos en la multiplicación de números enteros grandes, encontramos diversas postulaciones a lo largo del tiempo sobre cuál sería el algoritmo más adecuado. Todo comenzó con el algoritmo tradicional —también conocido como largo o de escuela— que, durante años, fue considerado la mejor solución posible. Esta idea fue respaldada por la conjetura de Kolmogorov, que sostenía que dicho algoritmo era asintóticamente óptimo.
+
+Afortunadamente para el desarrollo de la investigación, Kolmogorov estaba equivocado. Su error permitió que el campo continuara avanzando, dando paso a nuevas propuestas que han surgido a lo largo de los años, entre las cuales principalmente se encuentran:
+\begin{itemize}
+    \item \textbf{Karatsuba (1962)}: Primer algoritmo en mejorar el método tradicional. Divide los números en partes y reduce la complejidad a:
+    \[
+    O(n^{\log_2 3}) \approx O(n^{1.585})
+    \]
+    
+    \item \textbf{Toom-Cook (1963)}: Generalización del algoritmo de Karatsuba. Para cierto grado $k$, su complejidad es:
+    \[
+    O(n^{\log_k (2k - 1)})
+    \]
+
+    \item \textbf{Sch\"onhage-Strassen (1971)}: Introduce un algoritmo basado en la transformada rápida de Fourier (FFT) sobre enteros módulo una potencia de dos. Su complejidad es:
+    \[
+    O(n \log n \log \log n)
+    \]
+
+    \item \textbf{F\"urer (2007)}: Utiliza técnicas avanzadas de transformadas de Fourier con anillos más eficientes. Logra una mejora asintótica:
+    \[
+    O\left(n \log n \cdot 2^{O(\log^* n)}\right)
+    \]
+\end{itemize}
+
+
+Estos antecedentes reflejan el esfuerzo sostenido por optimizar el problema central de la multiplicación de enteros, además de evidenciar los largos periodos de tiempo que han transcurrido entre un postulado y otro. Este intervalo entre avances revela que la investigación en este campo ha experimentado pausas de varias décadas, lo que refuerza la importancia de cada nuevo aporte. En ese sentido, la reciente propuesta de David Harvey y Joris van der Hoeven no solo representa un avance técnico significativo, sino que puede considerarse un hecho destacable e incluso histórico dentro del desarrollo de los algoritmos de multiplicación.
+
+El presente informe tiene como finalidad presentar una visión general de los fundamentos teóricos que sustentan este y demás algoritmos importantes, explicando su funcionamiento de manera conceptual, y situar al lector dentro del panorama histórico de avances algorítmicos en la multiplicación de enteros.    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Antecedentes}
+\label{sec:into_back}
+
+El método de multiplicación tradicional —también conocido como ``multiplicación larga'' o ``método de escuela''— ha sido el enfoque estándar durante siglos a la hora de multiplicar números enteros. Este algoritmo consiste en multiplicar cada dígito de un número por cada dígito del otro, y sumar los productos parciales correspondientes. Para dos números de \( n \) dígitos, por lo que este procedimiento implica una complejidad computacional de \( O(n^2) \). 
+
+Y si bien este método es sencillo y fácil de implementar, su complejidad de naturaleza cuadrática lo vuelve ineficiente al trabajar con números muy grandes, como por ejemplo los que se presentan en campos como: criptografía, teoría de números computacional u otras aplicaciones de gran escala. 
+Esta limitación motivó a la comunidad científica a buscar algoritmos más eficientes, con el fin de reducir el costo computacional de esta operación.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Planteamiento del probelma}
+\label{sec:intro_prob_art}
+
+La mejora en la eficiencia de la multiplicación de enteros muy grandes ha sido abordada a través de diversas propuestas algorítmicas y conjeturas a lo largo del tiempo. Cada nuevo enfoque ha buscado reducir la complejidad computacional de esta operación fundamental. Dentro de este contexto, destaca la propuesta presentada por David Harvey y Joris van der Hoeven en el año 2020, en la cual introducen un algoritmo con complejidad \( O(n \log n) \), el cual rompe el récord anterior del algoritmo de Schönhage-Strassen con complejidad \( O(n \log n \log \log n) \), y constituye así un avance significativo y potencialmente histórico en el campo.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fines y objetivos}
+\label{sec:intro_aims_obj}
+
+\textbf{Fines:}
+Explicar de manera conceptual la naturaleza del algoritmo presentado por David Harvey y Joris van der Hoeven en 2020, resaltando su relevancia teórica y el impacto que representa en la eficiencia de la multiplicación de enteros grandes.
+
+
+\textbf{Objetivos:}
+Explicar los diferentes algoritmos propuestos a lo largo de los años para resolver el problema de la multiplicación de enteros.
+Dar contexto histórico a las contribuciones de cada autor o autores y cómo cada una de estas han influido en el desarrollo progresivo de soluciones más eficientes.
+Analizar comparativamente las complejidades computacionales de los algoritmos más representativos.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Enfoque}
+\label{sec:intro_sol} % label of Org section
+La metodología aplicada en este informe consiste en un análisis conceptual y comparativo de los algoritmos de multiplicación de enteros grandes desarrollados a lo largo de la historia, con especial énfasis en el algoritmo presentado por Harvey y van der Hoeven en 2020. Para ello, se estudian las bases teóricas de cada propuesta, su complejidad computacional y su evolución, permitiendo así comprender cómo cada avance ha contribuido a mejorar la eficiencia del problema central.
+
+Además, se examinan las innovaciones matemáticas y técnicas que fundamentan el algoritmo más reciente, destacando su relevancia y el impacto que representa frente a las soluciones previas. Este enfoque permite contextualizar el progreso histórico y evaluar la importancia del nuevo aporte dentro del campo de la aritmética computacional.
+
+Como parte del enfoque metodológico adoptado, se ha optado por complementar el análisis teórico con una serie de pruebas experimentales y gráficos implementados en Python. Estos permitirán evaluar de manera empírica el rendimiento y comportamiento de los distintos algoritmos de multiplicación de enteros, proporcionando así una perspectiva más completa y aplicable.
+
+\subsection{Medición del rendimiento}
+\label{sec:intro_some_sub1}
+Se comparará el tiempo de ejecución de los algoritmos al operar con enteros de diferentes tamaños.
+
+\subsection{Gráficos}
+\label{sec:intro_some_sub3}
+Se incluirán gráficos unitarios y comparativos entre los diferentes algoritmos ante diferentes casos de medición. 
+
+\subsection{Discusión crítica}
+\label{sec:intro_some_sub4}
+Finalmente, se realizará un análisis crítico de los resultados, evaluando no solo cuál algoritmo resulta más rápido, sino también por qué lo es en determinados escenarios. Se destacarán las ventajas prácticas de ciertos métodos, incluso si su complejidad teórica no es la óptima en todos los casos.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Resumen de contribuciones y logros} %  use this section 
+\label{sec:intro_sum_results} % label of summary of results
+En este trabajo se presenta un resumen crítico y detallado de los principales algoritmos para la multiplicación eficiente de enteros grandes, con un enfoque particular en el avance presentado por Harvey y van der Hoeven en 2020.
+
+Se desarrollaron implementaciones en Python para algunos de estos algoritmos clásicos, acompañadas de visualizaciones gráficas que permiten comparar su rendimiento en términos de tiempo de ejecución y complejidad teórica. Estas gráficas fueron generadas utilizando Google Colab, facilitando la interacción y el análisis dinámico de los datos.
+
+Además, se ha proporcionado un análisis conceptual que contextualiza históricamente cada método y su evolución, aportando una visión integral que combina teoría, práctica y evaluación crítica.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
