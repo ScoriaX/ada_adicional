@@ -7,7 +7,10 @@ El proyecto incluye una revisión de los métodos clásicos como la multiplicaci
 Se presentan visualizaciones comparativas del comportamiento teórico de los algoritmos en términos de tiempo, memoria y eficiencia.
 
 📄 **[Ver informe completo (PDF)](informe.pdf)**
+
 📄 **[Ver COLAB del proyecto (IPYNB)](ada_adicional.ipynb)**
+
+📄 **[Ver codigo del problema de programación](codigo_adicional.cpp)**
 
 Piero Fabricio Poblete Andía.
 
